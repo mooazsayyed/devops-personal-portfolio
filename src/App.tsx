@@ -325,10 +325,13 @@ export default function App() {
               <span>View My Work</span>
             </Link>
             
+            <a href="/file/mooazsayyed_cv.pdf" download="mooazsayyed_cv.pdf">
             <button className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Download className="w-5 h-5 text-blue-400" />
-              <span>Download Resume</span>
-            </button>
+                <Download className="w-5 h-5 text-blue-400" />
+                <span>Download Resume</span>
+              </button>
+            </a>
+
             
             <button className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
               <Send className="w-5 h-5 text-cyan-400" />

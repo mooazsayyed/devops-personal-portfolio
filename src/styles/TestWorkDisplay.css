@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #0a0a12;
+  font-family: 'BladeRunner', 'Orbitron', sans-serif;
+  color: white;
+}
+
+@keyframes glow {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(12, 255, 225, 0.7));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 15px rgba(12, 255, 225, 0.9));
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(12, 255, 225, 0.7));
+  }
+}
+
+/* Add some responsive design adjustments */
+@media (max-width: 768px) {
+  .RoadSurface {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .RoadSurface {
+    width: 100%;
+  }
+  
+  .LaneMarker {
+    width: 6px;
+  }
+} 

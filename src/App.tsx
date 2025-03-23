@@ -115,6 +115,9 @@ export default function App() {
           transition={{ duration: 0.8 }}
           className="relative max-w-4xl w-full space-y-8 text-center backdrop-blur-sm bg-black/40 p-8 rounded-2xl border border-white/5"
         >
+          {/* New Text Elements */}
+          <h1 className="text-4xl font-bold text-white">Welcome to My Portfolio</h1>
+          
           {/* Animated Circuit Background */}
           <div className="absolute inset-0 -z-10 overflow-hidden">
             {/* Top Left Corner */}
@@ -304,11 +307,11 @@ export default function App() {
           </div>
 
           <div className="flex items-center justify-center mb-6">
-            <TerminalIcon className="w-12 h-12 text-emerald-400" />
+            <TerminalIcon className="w-12 h-12 text-emerald-400 transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500" />
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
-            <TypewriterText text="Mooaz Sayyed – DevOps Engineer | SRE" />
+            <TypewriterText text="I am Mooaz Sayyed – DevOps Engineer | SRE" />
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mt-6">

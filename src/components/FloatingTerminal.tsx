@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal as TerminalIcon, ChevronRight, X, Minimize2, Maximize2 } from 'lucide-react';
+import { Terminal as TerminalIcon, ChevronRight, X, Minimize2, Maximize2, ArrowUpRight } from 'lucide-react';
 
 interface CommandHistory {
   command: string;
@@ -22,13 +22,40 @@ export const FloatingTerminal: React.FC = () => {
   const [history, setHistory] = useState<CommandHistory[]>([]);
   const [currentCommand, setCurrentCommand] = useState('');
   const terminalRef = useRef<HTMLDivElement>(null);
+  const [shouldPulse, setShouldPulse] = useState(true);
+  const [showTryMe, setShowTryMe] = useState(true);
 
   useEffect(() => {
-    console.log('FloatingTerminal component mounted');
+    if (isOpen) {
+      setHistory([{
+        command: '',
+        output: 'Welcome to the interactive terminal!\n\n' +
+               'Available commands:\n' +
+               '  help     - Show this help message\n' +
+               '  about    - About the portfolio\n' +
+               '  skills   - View skills\n' +
+               '  contact  - Contact information\n' +
+               '  clear    - Clear terminal\n' +
+               '  exit     - Close terminal\n\n' +
+               'Type a command to begin...',
+        timestamp: new Date()
+      }]);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [history]);
+
+  useEffect(() => {
+    const pulseInterval = setInterval(() => {
+      setShouldPulse(prev => !prev);
+    }, 3000);
+
+    return () => clearInterval(pulseInterval);
+  }, []);
 
   const handleCommandSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,14 +102,75 @@ export const FloatingTerminal: React.FC = () => {
 
   return (
     <>
-      {/* Terminal Toggle Button */}
+      {/* Terminal Toggle Button with enhanced animations */}
       <motion.button
         initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        className="fixed top-4 right-4 z-[9999] p-2 rounded-full bg-blue-500 border-2 border-blue-400 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/50"
-        onClick={() => setIsOpen(true)}
+        animate={{ 
+          scale: shouldPulse ? [1, 1.1, 1] : 1,
+          rotate: shouldPulse ? [0, -10, 10, -10, 0] : 0,
+        }}
+        transition={{ 
+          duration: 1,
+          repeat: shouldPulse ? Infinity : 0,
+          repeatDelay: 2
+        }}
+        className="fixed top-4 right-4 z-[9999] p-3 rounded-full bg-blue-500 border-2 border-blue-400 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/50 group"
+        onClick={() => {
+          setIsOpen(true);
+          setShouldPulse(false);
+          setShowTryMe(false);
+        }}
       >
-        <TerminalIcon className="w-5 h-5 text-white" />
+        <TerminalIcon className="w-6 h-6 text-white" />
+
+        {/* Floating "Try me!" text with curved arrow */}
+        {showTryMe && (
+          <motion.div
+            className="absolute -left-40 top-0"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ 
+              opacity: 1, 
+              y: [0, -5, 0],
+            }}
+            transition={{
+              y: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+          >
+            <div className="relative flex items-center">
+              {/* Try me! text box with neon effect */}
+              <span className="text-white font-semibold text-lg neon-text">
+                Try me!
+              </span>
+              
+              {/* Curved Arrow SVG */}
+              <svg
+                width="60"
+                height="30"
+                viewBox="0 0 60 30"
+                fill="none"
+                className="ml-2"
+              >
+                <path
+                  d="M0,15 Q20,15 30,0 T60,15"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray="4 4"
+                />
+                <path
+                  d="M50,10 L60,15 L50,20"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+          </motion.div>
+        )}
       </motion.button>
 
       {/* Floating Terminal Window */}

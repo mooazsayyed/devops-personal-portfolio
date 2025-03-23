@@ -325,15 +325,50 @@ export default function App() {
               <span>View My Work</span>
             </Link>
             
-            <a href="/file/mooazsayyed_cv.pdf" download="mooazsayyed_cv.pdf">
-            <button className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <Download className="w-5 h-5 text-blue-400" />
-                <span>Download Resume</span>
-              </button>
+            <a 
+              href="/mooazsayyed_cv.pdf" 
+              download="mooazsayyed_cv.pdf"
+              className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+              onClick={(e) => {
+                // Add error handling for download
+                e.preventDefault();
+                fetch('/mooazsayyed_cv.pdf')
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('File not found');
+                    }
+                    return response.blob();
+                  })
+                  .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'mooazsayyed_cv.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                  })
+                  .catch(error => {
+                    console.error('Error downloading file:', error);
+                    alert('Unable to download CV. Please try again later.');
+                  });
+              }}
+            >
+              <Download className="w-5 h-5 text-blue-400" />
+              <span>Download Resume</span>
             </a>
 
             
-            <button className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
+            <button 
+              onClick={() => {
+                document.getElementById('contact')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+              className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
               <Send className="w-5 h-5 text-cyan-400" />
               <span>Contact Me</span>
             </button>
@@ -366,7 +401,7 @@ export default function App() {
             <ScrollReveal delay={0.4}>
               <TechCard
                 title="CI/CD Tools"
-                items={['Jenkins', 'GitHub Actions', 'ArgoCD']}
+                items={['Jenkins', 'GitHub Actions', 'Gitlab']}
                 icon={<GitBranch className="w-6 h-6 text-cyan-400" />}
               />
             </ScrollReveal>

@@ -1,25 +1,63 @@
 import React, { useState } from 'react';
 import { Linkedin, Github, Twitter, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 interface ContactFormProps {
-  onSubmit: (data: { name: string; email: string; message: string }) => void;
+  onSubmit?: (data: FormData) => void;
 }
 
 export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    message: '',
+    message: ''
   });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(formData);
-    setFormData({ name: '', email: '', message: '' });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Replace these with your actual EmailJS credentials
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      };
+
+      await emailjs.send(
+        'service_ghjt4rl', // Replace with your EmailJS service ID
+        'template_5y2pjyf', // Replace with your EmailJS template ID
+        templateParams,
+        'V30n0VbcPw929FE6u' // Replace with your EmailJS public key
+      );
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      onSubmit?.(formData);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,7 +94,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/50 text-white placeholder-gray-400 transition-colors"
-                placeholder="sayyedmooaz@gmail.com"
+                placeholder="Your email"
               />
             </div>
 
@@ -77,12 +115,29 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
             </div>
           </div>
 
+          {submitStatus === 'success' && (
+            <div className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400">
+              Message sent successfully! I'll get back to you soon.
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400">
+              Failed to send message. Please try again later.
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg shadow-blue-500/20"
+            disabled={isSubmitting}
+            className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Send className="w-5 h-5" />
-            <span>Send Message</span>
+            {isSubmitting ? (
+              <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+            ) : (
+              <Send className="w-5 h-5" />
+            )}
+            <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
           </button>
         </form>
       </div>

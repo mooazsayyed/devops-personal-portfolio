@@ -330,32 +330,16 @@ export default function App() {
             
             <a 
               href="/mooazsayyed_cv.pdf" 
-              download="mooazsayyed_cv.pdf"
+              download
               className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
               onClick={(e) => {
-                // Add error handling for download
                 e.preventDefault();
-                fetch('/mooazsayyed_cv.pdf')
-                  .then(response => {
-                    if (!response.ok) {
-                      throw new Error('File not found');
-                    }
-                    return response.blob();
-                  })
-                  .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'mooazsayyed_cv.pdf';
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                  })
-                  .catch(error => {
-                    console.error('Error downloading file:', error);
-                    alert('Unable to download CV. Please try again later.');
-                  });
+                const link = document.createElement('a');
+                link.href = '/mooazsayyed_cv.pdf';
+                link.setAttribute('download', 'mooazsayyed_cv.pdf');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
               }}
             >
               <Download className="w-5 h-5 text-blue-400" />

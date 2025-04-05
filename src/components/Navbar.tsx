@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Twitter, Terminal, Code2, Cloud, Database, Shield, Mail } from 'lucide-react';
+import { Logo } from './Logo';
 
 const navItems = [
   { name: 'Home', icon: <Terminal className="w-5 h-5" />, href: '#home' },
@@ -32,53 +33,61 @@ export const Navbar: React.FC = () => {
         scrolled ? 'py-4 bg-black/50 backdrop-blur-md' : 'py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-center">
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navItems.map((item) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                className="relative group px-4 py-2 rounded-lg"
-                onHoverStart={() => setHoveredItem(item.name)}
-                onHoverEnd={() => setHoveredItem(null)}
-              >
-                {/* Hover Background Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredItem === item.name ? 1 : 0 }}
-                  transition={{ duration: 0.2 }}
-                />
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between gap-8">
+          {/* Logo */}
+          <a href="#home" className="flex-shrink-0 -ml-3">
+            <Logo />
+          </a>
 
-                {/* Glow Effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg"
-                  initial={{ boxShadow: '0 0 0 0 rgba(59, 130, 246, 0)' }}
-                  animate={{
-                    boxShadow: hoveredItem === item.name
-                      ? '0 0 20px 5px rgba(59, 130, 246, 0.3)'
-                      : '0 0 0 0 rgba(59, 130, 246, 0)'
-                  }}
-                  transition={{ duration: 0.2 }}
-                />
+          {/* Center Container for Nav Links */}
+          <div className="flex-1 flex justify-center">
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  className="relative group px-3 py-2 rounded-lg"
+                  onHoverStart={() => setHoveredItem(item.name)}
+                  onHoverEnd={() => setHoveredItem(null)}
+                >
+                  {/* Hover Background Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: hoveredItem === item.name ? 1 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  />
 
-                {/* Content */}
-                <div className="relative flex items-center gap-2">
-                  <span className="text-gray-300 group-hover:text-blue-400 transition-colors">
-                    {item.icon}
-                  </span>
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {item.name}
-                  </span>
-                </div>
-              </motion.a>
-            ))}
+                  {/* Glow Effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-lg"
+                    initial={{ boxShadow: '0 0 0 0 rgba(59, 130, 246, 0)' }}
+                    animate={{
+                      boxShadow: hoveredItem === item.name
+                        ? '0 0 20px 5px rgba(59, 130, 246, 0.3)'
+                        : '0 0 0 0 rgba(59, 130, 246, 0)'
+                    }}
+                    transition={{ duration: 0.2 }}
+                  />
+
+                  {/* Content */}
+                  <div className="relative flex items-center gap-1.5">
+                    <span className="text-gray-300 group-hover:text-blue-400 transition-colors">
+                      {item.icon}
+                    </span>
+                    <span className="text-gray-300 group-hover:text-white transition-colors">
+                      {item.name}
+                    </span>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
           </div>
 
           {/* Social Links */}
-          <div className="hidden md:flex items-center space-x-4 ml-8">
+          <div className="hidden md:flex items-center gap-4">
             {[
               { icon: <Github className="w-5 h-5" />, href: 'https://github.com/mooazsayyed/', color: 'hover:text-purple-400' },
               { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/mooazsayyed/', color: 'hover:text-blue-400' },

@@ -114,7 +114,7 @@ export const FloatingTerminal: React.FC = () => {
           repeat: shouldPulse ? Infinity : 0,
           repeatDelay: 2
         }}
-        className="fixed top-4 right-4 z-[9999] p-3 rounded-full bg-blue-500 border-2 border-blue-400 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/50 group"
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-blue-500 border-2 border-blue-400 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/50 group"
         onClick={() => {
           setIsOpen(true);
           setShouldPulse(false);
@@ -122,56 +122,30 @@ export const FloatingTerminal: React.FC = () => {
         }}
       >
         <TerminalIcon className="w-6 h-6 text-white" />
-
-        {/* Floating "Try me!" text with curved arrow */}
-        {showTryMe && (
-          <motion.div
-            className="absolute -left-40 top-0"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ 
-              opacity: 1, 
-              y: [0, -5, 0],
-            }}
-            transition={{
-              y: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
-            }}
-          >
-            <div className="relative flex items-center">
-              {/* Try me! text box with neon effect */}
-              <span className="text-white font-semibold text-lg neon-text">
-                Try me!
-              </span>
-              
-              {/* Curved Arrow SVG */}
-              <svg
-                width="60"
-                height="30"
-                viewBox="0 0 60 30"
-                fill="none"
-                className="ml-2"
-              >
-                <path
-                  d="M0,15 Q20,15 30,0 T60,15"
-                  stroke="white"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeDasharray="4 4"
-                />
-                <path
-                  d="M50,10 L60,15 L50,20"
-                  stroke="white"
-                  strokeWidth="2"
-                  fill="none"
-                />
-              </svg>
-            </div>
-          </motion.div>
-        )}
       </motion.button>
+
+      {/* Separate "Try me!" text */}
+      {showTryMe && (
+        <motion.div
+          className="fixed top-[60px] right-4 z-50 whitespace-nowrap flex justify-center"
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ 
+            opacity: 1,
+            y: [0, 3, 0]
+          }}
+          transition={{
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        >
+          <span className="px-2 py-1 rounded-md bg-blue-500/80 backdrop-blur-sm text-white text-sm font-medium border border-blue-400/50 shadow-lg">
+            Try me!
+          </span>
+        </motion.div>
+      )}
 
       {/* Floating Terminal Window */}
       <AnimatePresence>

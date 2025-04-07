@@ -10,33 +10,21 @@ export const ViewCounter: React.FC = () => {
   useEffect(() => {
     const updateViews = async () => {
       try {
-        // Use a simpler namespace that doesn't include dots
-        const namespace = 'mooaz-portfolio';
-        const key = 'views';
-
-        // First, try to get the current views
-        const getResponse = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
-        const getData = await getResponse.json();
-        
-        if (getData.value === undefined) {
-          // If the namespace doesn't exist, create it
-          const createResponse = await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`);
-          const createData = await createResponse.json();
-          
-          if (createData.status === 200) {
-            setViews(0);
-          } else {
-            throw new Error('Failed to create counter');
-          }
-        } else {
-          setViews(getData.value);
+        // Use counter.dev service
+        const response = await fetch('https://counter.dev/api/counter?site=mooaz-portfolio');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        // Then, increment the counter
-        await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
+        const data = await response.json();
+        
+        if (data && typeof data.count === 'number') {
+          setViews(data.count);
+        } else {
+          throw new Error('Invalid response format');
+        }
       } catch (error) {
         console.error('Error updating views:', error);
-        setError('Failed to load views');
+        setError(`Failed to load views: ${error instanceof Error ? error.message : 'Unknown error'}`);
       } finally {
         setIsLoading(false);
       }

@@ -5,19 +5,38 @@ import { Eye } from 'lucide-react';
 export const ViewCounter: React.FC = () => {
   const [views, setViews] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const updateViews = async () => {
       try {
-        // First, get the current views
-        const response = await fetch('https://api.countapi.xyz/get/mooazsayyed.live/views');
-        const data = await response.json();
-        setViews(data.value);
+        // Use a simpler namespace that doesn't include dots
+        const namespace = 'mooaz-portfolio';
+        const key = 'views';
+
+        // First, try to get the current views
+        const getResponse = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
+        const getData = await getResponse.json();
+        
+        if (getData.value === undefined) {
+          // If the namespace doesn't exist, create it
+          const createResponse = await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`);
+          const createData = await createResponse.json();
+          
+          if (createData.status === 200) {
+            setViews(0);
+          } else {
+            throw new Error('Failed to create counter');
+          }
+        } else {
+          setViews(getData.value);
+        }
 
         // Then, increment the counter
-        await fetch('https://api.countapi.xyz/hit/mooazsayyed.live/views');
+        await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
       } catch (error) {
         console.error('Error updating views:', error);
+        setError('Failed to load views');
       } finally {
         setIsLoading(false);
       }
@@ -35,7 +54,7 @@ export const ViewCounter: React.FC = () => {
     >
       <Eye className="w-4 h-4 text-blue-400" />
       <span className="text-sm text-gray-300">
-        {isLoading ? 'Loading...' : `${views?.toLocaleString()} views`}
+        {isLoading ? 'Loading...' : error ? error : `${views?.toLocaleString() || 0} views`}
       </span>
     </motion.div>
   );

@@ -8,39 +8,29 @@ export const ViewCounter: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const updateViews = async () => {
+    const fetchViews = async () => {
       try {
-        // First, increment the counter
-        await fetch('https://api.hitcounter.dev/counter?site=mooazsayyed.live&action=increment', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch('https://api.counterapi.dev/v1/mooaz/portfolio/up');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        // Then, get the updated count
-        const response = await fetch('https://api.hitcounter.dev/counter?site=mooazsayyed.live');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
         const data = await response.json();
-        
+        console.log('Counter API response:', data);
+
         if (data && typeof data.count === 'number') {
           setViews(data.count);
         } else {
           throw new Error('Invalid response format');
         }
-      } catch (error) {
-        console.error('Error updating views:', error);
-        // If the API fails, show a static "0 views" instead of an error
+      } catch (err) {
+        console.error('Error fetching view count:', err);
         setViews(0);
-        setError(null);
+        setError('Could not fetch views');
       } finally {
         setIsLoading(false);
       }
     };
 
-    updateViews();
+    fetchViews();
   }, []);
 
   return (
@@ -57,4 +47,4 @@ export const ViewCounter: React.FC = () => {
       </span>
     </motion.div>
   );
-}; 
+};

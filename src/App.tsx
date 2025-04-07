@@ -13,6 +13,7 @@ import { SkillsNetwork } from './components/SkillsNetwork';
 import { CICDWorkflow } from './components/CICDWorkflow';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ViewCounter } from './components/ViewCounter';
 
 function TypewriterText({ text }: { text: string }) {
   const [displayText, setDisplayText] = useState('');
@@ -665,6 +666,9 @@ export default function App() {
 
       {/* Floating Terminal */}
       <FloatingTerminal />
+      
+      {/* View Counter */}
+      <ViewCounter />
     </div>
   );
 }

@@ -10,8 +10,8 @@ export const ViewCounter: React.FC = () => {
   useEffect(() => {
     const updateViews = async () => {
       try {
-        // Use counter.dev service
-        const response = await fetch('https://counter.dev/api/counter?site=mooaz-portfolio');
+        // Use counter.dev service with the actual domain
+        const response = await fetch('https://counter.dev/api/counter?site=mooazsayyed.live');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

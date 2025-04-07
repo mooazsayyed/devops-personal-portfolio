@@ -10,7 +10,15 @@ export const ViewCounter: React.FC = () => {
   useEffect(() => {
     const updateViews = async () => {
       try {
-        // Use hitcounter.dev service
+        // First, increment the counter
+        await fetch('https://api.hitcounter.dev/counter?site=mooazsayyed.live&action=increment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Then, get the updated count
         const response = await fetch('https://api.hitcounter.dev/counter?site=mooazsayyed.live');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -41,6 +49,7 @@ export const ViewCounter: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-3 py-2 rounded-lg bg-black/50 backdrop-blur-md border border-white/10"
+      title="Total site views"
     >
       <Eye className="w-4 h-4 text-blue-400" />
       <span className="text-sm text-gray-300">

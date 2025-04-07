@@ -329,25 +329,17 @@ export default function App() {
               <span>View My Work</span>
             </Link>
             
-            <a 
-              href="/mooazsayyed_cv.pdf" 
-              download
+            <a
+              href="/mooazsayyed_cv.pdf"
+              download="mooazsayyed_cv.pdf"
               className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
-              onClick={(e) => {
-                e.preventDefault();
-                const link = document.createElement('a');
-                link.href = '/mooazsayyed_cv.pdf';
-                link.setAttribute('download', 'mooazsayyed_cv.pdf');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
             >
               <Download className="w-5 h-5 text-blue-400" />
               <span>Download Resume</span>
             </a>
 
-            
+
+                        
             <button 
               onClick={() => {
                 document.getElementById('contact')?.scrollIntoView({ 

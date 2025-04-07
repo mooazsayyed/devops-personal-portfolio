@@ -10,8 +10,8 @@ export const ViewCounter: React.FC = () => {
   useEffect(() => {
     const updateViews = async () => {
       try {
-        // Use counter.dev service with the actual domain
-        const response = await fetch('https://counter.dev/api/counter?site=mooazsayyed.live');
+        // Use hitcounter.dev service
+        const response = await fetch('https://api.hitcounter.dev/counter?site=mooazsayyed.live');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -24,7 +24,9 @@ export const ViewCounter: React.FC = () => {
         }
       } catch (error) {
         console.error('Error updating views:', error);
-        setError(`Failed to load views: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        // If the API fails, show a static "0 views" instead of an error
+        setViews(0);
+        setError(null);
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +44,7 @@ export const ViewCounter: React.FC = () => {
     >
       <Eye className="w-4 h-4 text-blue-400" />
       <span className="text-sm text-gray-300">
-        {isLoading ? 'Loading...' : error ? error : `${views?.toLocaleString() || 0} views`}
+        {isLoading ? 'Loading...' : `${views?.toLocaleString() || 0} views`}
       </span>
     </motion.div>
   );

@@ -30,15 +30,15 @@ const experience: TimelineEntry[] = [
     subtitle: 'Finacplus.',
     date: '2024 - Present',
     description: 'Leading infrastructure automation and CI/CD initiatives',
-    link: 'https://example.com/project1'
+    link: 'https://www.finacplus.com/'
   },
   {
     id: 'exp-2',
     title: 'Web development Intern',
-    subtitle: 'Cloud Systems Ltd.',
+    subtitle: 'muVerity Consulting Services.',
     date: '2024 - 2024',
     description: 'Implemented automated deployment pipelines and monitoring solutions',
-    link: 'https://example.com/project2'
+    link: 'https://www.muverity.com/'
   }
 ];
 
@@ -85,7 +85,7 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ entry, isActive, onClick, s
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-base font-medium text-blue-400 hover:text-blue-300 mt-4 transition-colors"
               >
-                View Project <ExternalLink className="w-5 h-5" />
+                View  <ExternalLink className="w-5 h-5" />
               </a>
             )}
           </div>

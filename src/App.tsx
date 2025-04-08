@@ -17,22 +17,25 @@ import { ViewCounter } from './components/ViewCounter';
 
 function TypewriterText({ text }: { text: string }) {
   const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
   
   useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex <= text.length) {
-        setDisplayText(text.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-    
-    return () => clearInterval(interval);
-  }, [text]);
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100);
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
 
-  return <span className="font-mono">{displayText}<span className="animate-pulse">_</span></span>;
+  return (
+    <span className="font-mono font-bold">
+      {displayText}
+      <span className="animate-pulse">_</span>
+    </span>
+  );
 }
 
 interface ScrollRevealProps {
@@ -116,208 +119,99 @@ export default function App() {
           transition={{ duration: 0.8 }}
           className="relative max-w-4xl w-full space-y-8 text-center backdrop-blur-sm bg-black/40 p-8 rounded-2xl border border-white/5"
         >
-          {/* New Text Elements */}
-          <h1 className="text-4xl font-bold text-white">Welcome to My Portfolio</h1>
-          
-          {/* Animated Circuit Background */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            {/* Top Left Corner */}
-            <svg className="absolute -top-20 -left-20 w-40 h-40 text-emerald-500/10" viewBox="0 0 100 100">
-              <motion.path
-                d="M100,0 L60,0 L60,20 L40,20 L40,40 L20,40 L20,60 L0,60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ 
-                  pathLength: 1, 
-                  opacity: [0.1, 0.3, 0.1],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 2px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
-                  ease: "linear",
-                  times: [0, 0.5, 1]
-                }}
-              />
-              <motion.circle
-                cx="60"
-                cy="20"
-                r="2"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1.5, 0],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 3px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </svg>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="relative"
+          >
+            {/* Welcome Text */}
+            <h1 className="text-4xl font-bold text-white mb-8">Welcome to My Portfolio</h1>
 
-            {/* Top Right Corner */}
-            <svg className="absolute -top-20 -right-20 w-40 h-40 text-cyan-500/10" viewBox="0 0 100 100">
-              <motion.path
-                d="M0,0 L40,0 L40,20 L60,20 L60,40 L80,40 L80,60 L100,60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ 
-                  pathLength: 1, 
-                  opacity: [0.1, 0.3, 0.1],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 2px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
-                  ease: "linear",
-                  delay: 0.5,
-                  times: [0, 0.5, 1]
-                }}
-              />
-              <motion.circle
-                cx="40"
-                cy="20"
-                r="2"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1.5, 0],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 3px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-              />
-            </svg>
+            {/* Terminal Icon with enhanced animation */}
+            <motion.div 
+              className="flex items-center justify-center mb-6"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+                delay: 0.2
+              }}
+            >
+              <TerminalIcon className="w-12 h-12 text-emerald-400 transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500" />
+            </motion.div>
 
-            {/* Bottom Left Corner */}
-            <svg className="absolute -bottom-20 -left-20 w-40 h-40 text-teal-500/10" viewBox="0 0 100 100">
-              <motion.path
-                d="M100,100 L60,100 L60,80 L40,80 L40,60 L20,60 L20,40 L0,40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ 
-                  pathLength: 1, 
-                  opacity: [0.1, 0.3, 0.1],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 2px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
-                  ease: "linear",
-                  delay: 1,
-                  times: [0, 0.5, 1]
-                }}
-              />
-              <motion.circle
-                cx="60"
-                cy="80"
-                r="2"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1.5, 0],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 3px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-              />
-            </svg>
+            {/* Hero Text with dramatic reveal */}
+            <motion.h1
+              initial={{ opacity: 0, y: 50, scale: 0.8 }}
+              animate={{ 
+                opacity: 1, 
+                y: [0, -5, 0],
+                scale: 1
+              }}
+              transition={{ 
+                duration: 1.2,
+                ease: [0.6, -0.05, 0.01, 0.99],
+                y: {
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  duration: 2,
+                }
+              }}
+              className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400"
+            >
+              <TypewriterText text="I am Mooaz Sayyed – DevOps Engineer | SRE" />
+            </motion.h1>
 
-            {/* Bottom Right Corner */}
-            <svg className="absolute -bottom-20 -right-20 w-40 h-40 text-emerald-500/10" viewBox="0 0 100 100">
-              <motion.path
-                d="M0,100 L40,100 L40,80 L60,80 L60,60 L80,60 L80,40 L100,40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ 
-                  pathLength: 1, 
-                  opacity: [0.1, 0.3, 0.1],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 2px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
-                  ease: "linear",
-                  delay: 1.5,
-                  times: [0, 0.5, 1]
-                }}
-              />
-              <motion.circle
-                cx="40"
-                cy="80"
-                r="2"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1.5, 0],
-                  filter: ["drop-shadow(0 0 0px currentColor)", "drop-shadow(0 0 3px currentColor)", "drop-shadow(0 0 0px currentColor)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
-              />
-            </svg>
+            {/* Subtitle with staggered reveal */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ 
+                opacity: 1, 
+                y: [0, -3, 0],
+              }}
+              transition={{ 
+                duration: 1,
+                delay: 0.8,
+                ease: "easeOut",
+                y: {
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  duration: 2,
+                  delay: 0.2
+                }
+              }}
+              className="text-xl md:text-2xl text-gray-300 mt-6"
+            >
+              Automating Deployments. Ensuring Reliability. Scaling with Confidence.
+            </motion.p>
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 opacity-5">
+            {/* Decorative elements */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
+              className="absolute -z-10 w-full h-full"
+            >
               <motion.div
-                className="w-full h-full"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(to right, currentColor 1px, transparent 1px),
-                    linear-gradient(to bottom, currentColor 1px, transparent 1px)
-                  `,
-                  backgroundSize: '20px 20px'
+                className="absolute top-0 left-0 w-full h-full"
+                animate={{
+                  background: [
+                    "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
+                    "radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)",
+                    "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)"
+                  ]
                 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
               />
-            </div>
-
-            {/* Animated Dots */}
-            <div className="absolute inset-0">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-emerald-400/20 rounded-full"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
-                  }}
-                  animate={{
-                    scale: [0, 1.5, 0],
-                    opacity: [0, 0.2, 0],
-                    filter: ["drop-shadow(0 0 0px #34d399)", "drop-shadow(0 0 4px #34d399)", "drop-shadow(0 0 0px #34d399)"]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.4,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center mb-6">
-            <TerminalIcon className="w-12 h-12 text-emerald-400 transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500" />
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
-            <TypewriterText text="I am Mooaz Sayyed – DevOps Engineer | SRE" />
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-300 mt-6">
-            Automating Deployments. Ensuring Reliability. Scaling with Confidence.
-          </p>
+            </motion.div>
+          </motion.div>
 
           {/* Glassmorphism Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-12">

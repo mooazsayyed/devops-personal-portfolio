@@ -462,26 +462,26 @@ export default function App() {
           <CertificationCard
             certifications={[
               {
-                name: "AWS Certified Solutions Architect - Professional",
-                issuer: "Amazon Web Services",
-                date: "2023",
-                badgeUrl: "/images/certifications/aws-sap.png",
-                credentialId: "AWS-123456"
+                name: "Microsoft Certified: Azure Fundamentals",
+                issuer: "Microsoft Azure",
+                date: "2024",
+                badgeUrl: "https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg",
+                credentialId: "A98BDCA0652B2A42"
               },
-              {
-                name: "Certified Kubernetes Administrator",
-                issuer: "Cloud Native Computing Foundation",
-                date: "2023",
-                badgeUrl: "/images/certifications/cka.png",
-                credentialId: "CKA-123456"
-              },
-              {
-                name: "HashiCorp Certified: Terraform Associate",
-                issuer: "HashiCorp",
-                date: "2023",
-                badgeUrl: "/images/certifications/terraform.png",
-                credentialId: "HCT-123456"
-              }
+              // {
+              //   name: "Certified Kubernetes Administrator",
+              //   issuer: "Cloud Native Computing Foundation",
+              //   date: "2023",
+              //   badgeUrl: "/images/certifications/cka.png",
+              //   credentialId: "CKA-123456"
+              // },
+              // {
+              //   name: "HashiCorp Certified: Terraform Associate",
+              //   issuer: "HashiCorp",
+              //   date: "2023",
+              //   badgeUrl: "/images/certifications/terraform.png",
+              //   credentialId: "HCT-123456"
+              // }
             ]}
             achievements={[
               {

@@ -29,34 +29,34 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
     <div className="space-y-12">
       {/* Certifications Section */}
       <div className="space-y-6">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <Trophy className="w-6 h-6 text-amber-400" />
           <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
             Certifications
           </h3>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex justify-center">
           {certifications.map((cert, index) => (
             <div
               key={index}
-              className="group relative p-6 rounded-2xl bg-gradient-to-br from-blue-900/50 to-cyan-900/50 backdrop-blur-md border border-white/10 hover:border-blue-400/50 transition-all duration-300"
+              className="group relative p-8 rounded-2xl bg-gradient-to-br from-blue-900/50 to-cyan-900/50 backdrop-blur-md border border-white/10 hover:border-blue-400/50 transition-all duration-300 max-w-md w-full"
             >
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col items-center text-center gap-6">
                 <div className="relative">
                   <img
                     src={cert.badgeUrl}
                     alt={`${cert.name} Badge`}
-                    className="w-16 h-16 rounded-lg transform group-hover:scale-110 transition-transform duration-300"
+                    className="w-32 h-32 rounded-lg transform group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-lg font-semibold text-white mb-1">{cert.name}</h4>
-                  <p className="text-sm text-gray-300">{cert.issuer}</p>
-                  <p className="text-sm text-gray-400">{cert.date}</p>
+                  <h4 className="text-2xl font-semibold text-white mb-3">{cert.name}</h4>
+                  <p className="text-lg text-gray-300 mb-2">{cert.issuer}</p>
+                  <p className="text-base text-gray-400 mb-2">{cert.date}</p>
                   {cert.credentialId && (
-                    <p className="text-xs text-gray-500 mt-1">ID: {cert.credentialId}</p>
+                    <p className="text-sm text-gray-500">ID: {cert.credentialId}</p>
                   )}
                 </div>
               </div>
@@ -67,7 +67,7 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
 
       {/* Achievements Section */}
       <div className="space-y-6">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <Star className="w-6 h-6 text-yellow-400" />
           <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
             Achievements

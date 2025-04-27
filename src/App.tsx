@@ -14,7 +14,6 @@ import { CICDWorkflow } from './components/CICDWorkflow';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ViewCounter } from './components/ViewCounter';
-import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 function TypewriterText({ text }: { text: string }) {
   const [displayText, setDisplayText] = useState('');
@@ -74,7 +73,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-cyan-900 text-white relative overflow-hidden">
-      <GoogleAnalytics />
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 origin-left z-50"

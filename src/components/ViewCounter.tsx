@@ -11,6 +11,7 @@ export const ViewCounter: React.FC = () => {
     const fetchViews = async () => {
       try {
         const response = await fetch('https://api.counterapi.dev/v1/mooaz/portfolio/up');
+        console.log('Raw response:', response);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
@@ -19,6 +20,7 @@ export const ViewCounter: React.FC = () => {
         if (data && typeof data.count === 'number') {
           setViews(data.count);
         } else {
+          console.error('Unexpected API response format:', data);
           throw new Error('Invalid response format');
         }
       } catch (err) {
@@ -48,3 +50,18 @@ export const ViewCounter: React.FC = () => {
     </motion.div>
   );
 };
+
+export const FreeVisitorCounter: React.FC = () => (
+  <div className="fixed bottom-4 right-4 z-50">
+    <a href="http://www.freevisitorcounters.com" target="_blank" rel="noopener noreferrer">
+      Free Counter
+    </a>
+    <iframe
+      src="https://www.freevisitorcounters.com/en/home/counter/1332889/t/2"
+      style={{ border: 'none', width: 100, height: 30, background: 'transparent' }}
+      title="Free Visitor Counter"
+      scrolling="no"
+      frameBorder="0"
+    ></iframe>
+  </div>
+);

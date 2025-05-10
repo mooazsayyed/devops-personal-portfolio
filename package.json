@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@netlify/plugin-sitemap": "^0.8.1",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "@types/react": "^18.3.5",

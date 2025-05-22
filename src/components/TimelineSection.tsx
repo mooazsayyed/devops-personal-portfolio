@@ -26,9 +26,9 @@ const education: TimelineEntry[] = [
 const experience: TimelineEntry[] = [
   {
     id: 'exp-1',
-    title: 'Devops Intern',
-    subtitle: 'Finacplus.',
-    date: '2024 - Present',
+    title: 'Software Engineer -Intern',
+    subtitle: 'Gbytes.',
+    date: '2025 - Present',
     description: 'Leading infrastructure automation and CI/CD initiatives',
     link: 'https://www.finacplus.com/'
   },

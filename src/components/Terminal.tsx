@@ -13,7 +13,7 @@ export function Terminal() {
   const commands: Command[] = [
     {
       command: 'whoami',
-      output: 'mooaz@devops ~ Devops Engineer Intern ',
+      output: 'mooaz@devops ~ Devops Engineer Aspirant ',
       delay: 1000
     },
     {

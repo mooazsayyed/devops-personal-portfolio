@@ -30,20 +30,20 @@ const workItems: WorkItem[] = [
     description: "Built a comprehensive CI/CD pipeline using Jenkins with automated testing, security scanning, and monitoring.",
     technologies: ["Jenkins", "Docker", "SonarQube", "Prometheus", "ArgoCD", "Kubernetes", "Trivy"],
     icon: <GitBranch className="w-6 h-6 text-cyan-400" />,
-    link: "/projects/cicd-platform",
+    link: "https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring",
     github: "https://github.com/example/cicd-platform",
-    docs: "https://docs.example.com/cicd-platform",
-    image: "/images/cicd.png"
+    docs: "https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring",
+    image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1755798383076/9c493aad-f72a-4e55-887c-46655918bf3f.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
   },
   {
-    title: "Monitoring & Observability Stack",
-    description: "Implemented a comprehensive monitoring solution with custom dashboards and alerting.",
+    title: "Production Grade Jenkins Monitoring with Prometheus, Grafana, InfluxDB",
+    description: "Implemented a comprehensive monitoring solution for Jenkins Server with custom dashboards and alerting.",
     technologies: ["Prometheus", "Grafana", "ELK Stack", "AlertManager", "InfluxDB"],
     icon: <LineChart className="w-6 h-6 text-purple-400" />,
-    link: "/projects/monitoring-stack",
-    github: "https://github.com/example/monitoring-stack",
-    docs: "https://docs.example.com/monitoring-stack",
-    image: "/images/monitoring.png"
+    // link: "https://blog.mooazsayyed.live/production-grade-jenkins-monitoring-with-prometheus-grafana-influxdb",
+    github: "https://github.com/mooazsayyed/Production-Grade-Jenkins-Monitoring",
+    docs: "https://blog.mooazsayyed.live/production-grade-jenkins-monitoring-with-prometheus-grafana-influxdb",
+    image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1756134007498/7dcd2746-17b5-4377-a87c-895be53c8083.gif?w=1600&h=840&fit=crop&crop=entropy&auto=format,compress&gif-q=60&format=webm"
   }
 ];
 

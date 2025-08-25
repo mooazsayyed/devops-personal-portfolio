@@ -49,3 +49,39 @@
 .rotate-y-12 {
   transform: rotateY(12deg);
 }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes skillBarFill {
+  from {
+    width: 0%;
+    opacity: 0;
+  }
+  to {
+    width: var(--target-width);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+    0 %, 100 % {
+        transform: translateX(-100 %);
+        opacity: 0;
+    }
+    50 % {
+        transform: translateX(100 %);
+        opacity: 1;
+    }
+}

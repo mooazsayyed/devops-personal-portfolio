@@ -3,14 +3,15 @@ import { Terminal as TerminalIcon, Download, Send, Code2, Cloud, GitBranch, Data
 import { Terminal } from './components/Terminal';
 import { FloatingTerminal } from './components/FloatingTerminal';
 import { TechCard } from './components/TechCard';
-import { DashboardPreview } from './components/DashboardPreview';
-import { ProjectCard } from './components/ProjectCard';
+// import { DashboardPreview } from './components/DashboardPreview';
+import ProjectCard from "./components/ProjectCard";
 import { CertificationCard } from './components/CertificationCard';
 import { ContactForm } from './components/ContactForm';
 import { Navbar } from './components/Navbar';
 import { TimelineSection } from './components/TimelineSection';
 import { SkillsNetwork } from './components/SkillsNetwork';
 import { CICDWorkflow } from './components/CICDWorkflow';
+import { DevOpsAchievements } from './components/AchievementPreview';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ViewCounter } from './components/ViewCounter';
@@ -18,14 +19,14 @@ import { ViewCounter } from './components/ViewCounter';
 function TypewriterText({ text }: { text: string }) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }, 100);
-      
+
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, text]);
@@ -46,7 +47,7 @@ interface ScrollRevealProps {
 function ScrollReveal({ children, delay = 0 }: ScrollRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   return (
     <motion.div
       ref={ref}
@@ -78,11 +79,11 @@ export default function App() {
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 origin-left z-50"
         style={{ scaleX }}
       />
-      
+
       <Navbar />
-      
+
       {/* Circuit Pattern Overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `url("https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=2000")`,
@@ -97,10 +98,10 @@ export default function App() {
         <div className="absolute w-full h-full opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="animate-pulse"/>
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="animate-pulse" />
             </pattern>
             <rect width="100" height="100" fill="url(#grid)" />
-            
+
             <g className="animate-[dash_20s_linear_infinite]">
               <path d="M20,50 Q50,20 80,50" stroke="currentColor" strokeWidth="0.5" fill="none" />
               <path d="M20,70 Q50,40 80,70" stroke="currentColor" strokeWidth="0.5" fill="none" />
@@ -112,7 +113,7 @@ export default function App() {
 
       <div className="relative min-h-screen flex flex-col items-center justify-start px-4 py-20 gap-20">
         {/* Hero Section */}
-        <motion.section 
+        <motion.section
           id="home"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -129,11 +130,11 @@ export default function App() {
             <h1 className="text-4xl font-bold text-white mb-8">Welcome to My Portfolio</h1>
 
             {/* Terminal Icon with enhanced animation */}
-            <motion.div 
+            <motion.div
               className="flex items-center justify-center mb-6"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ 
+              transition={{
                 type: "spring",
                 stiffness: 260,
                 damping: 20,
@@ -146,12 +147,12 @@ export default function App() {
             {/* Hero Text with dramatic reveal */}
             <motion.h1
               initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={{ 
-                opacity: 1, 
+              animate={{
+                opacity: 1,
                 y: [0, -5, 0],
                 scale: 1
               }}
-              transition={{ 
+              transition={{
                 duration: 1.2,
                 ease: [0.6, -0.05, 0.01, 0.99],
                 y: {
@@ -168,11 +169,11 @@ export default function App() {
             {/* Subtitle with staggered reveal */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
-              animate={{ 
-                opacity: 1, 
+              animate={{
+                opacity: 1,
                 y: [0, -3, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 1,
                 delay: 0.8,
                 ease: "easeOut",
@@ -215,14 +216,14 @@ export default function App() {
 
           {/* Glassmorphism Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-12">
-            <Link 
+            <Link
               to="/work"
               className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
               <Code2 className="w-5 h-5 text-cyan-400" />
               <span>View My Work</span>
             </Link>
-            
+
             <a
               href="/mooazsayyed_cv.pdf"
               download="mooazsayyed_cv.pdf"
@@ -233,10 +234,10 @@ export default function App() {
             </a>
 
 
-                        
-            <button 
+
+            <button
               onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ 
+                document.getElementById('contact')?.scrollIntoView({
                   behavior: 'smooth',
                   block: 'start'
                 });
@@ -257,7 +258,7 @@ export default function App() {
                 About Me
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                As a DevOps Engineer, I specialize in building and maintaining scalable, resilient infrastructure. 
+                As a DevOps Engineer, I specialize in building and maintaining scalable, resilient infrastructure.
                 With expertise in cloud platforms, CI/CD automation, and infrastructure as code, I help teams deliver software faster and more reliably.
               </p>
             </div>
@@ -320,9 +321,9 @@ export default function App() {
           {/* Dashboard Preview */}
           <div className="mt-16">
             <h3 className="text-2xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              Live DevOps Metrics
+              DevOps Skill Achievements
             </h3>
-            <DashboardPreview />
+            <DevOpsAchievements />
           </div>
         </section>
 
@@ -351,7 +352,7 @@ export default function App() {
                       <motion.div
                         className="relative group cursor-pointer"
                         whileHover={{ scale: 1.1 }}
-                        animate={{ 
+                        animate={{
                           y: [0, -2, 0],
                         }}
                         transition={{
@@ -361,9 +362,9 @@ export default function App() {
                       >
                         <div className="w-8 h-8">
                           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-                            <path d="M3.04 12.294C3.04 7.15 7.2 3 12.34 3c5.14 0 9.3 4.15 9.3 9.294 0 5.143-4.16 9.294-9.3 9.294-5.14 0-9.3-4.15-9.3-9.294z" fill="#D33833"/>
-                            <path d="M4.667 12.294a7.674 7.674 0 1015.347 0 7.674 7.674 0 00-15.347 0z" fill="#fff"/>
-                            <path d="M12.34 5.897c-3.532 0-6.397 2.865-6.397 6.397 0 3.532 2.865 6.397 6.397 6.397 3.532 0 6.397-2.865 6.397-6.397 0-3.532-2.865-6.397-6.397-6.397z" fill="#D33833"/>
+                            <path d="M3.04 12.294C3.04 7.15 7.2 3 12.34 3c5.14 0 9.3 4.15 9.3 9.294 0 5.143-4.16 9.294-9.3 9.294-5.14 0-9.3-4.15-9.3-9.294z" fill="#D33833" />
+                            <path d="M4.667 12.294a7.674 7.674 0 1015.347 0 7.674 7.674 0 00-15.347 0z" fill="#fff" />
+                            <path d="M12.34 5.897c-3.532 0-6.397 2.865-6.397 6.397 0 3.532 2.865 6.397 6.397 6.397 3.532 0 6.397-2.865 6.397-6.397 0-3.532-2.865-6.397-6.397-6.397z" fill="#D33833" />
                           </svg>
                         </div>
                         <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white bg-black/60 px-2 py-1 rounded">Jenkins</span>
@@ -372,7 +373,7 @@ export default function App() {
                       <motion.div
                         className="relative group cursor-pointer"
                         whileHover={{ scale: 1.1 }}
-                        animate={{ 
+                        animate={{
                           y: [0, -2, 0],
                         }}
                         transition={{
@@ -383,13 +384,13 @@ export default function App() {
                       >
                         <div className="w-8 h-8">
                           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-                            <path d="M12 21.6L7.2 10.8h9.6L12 21.6z" fill="#FC6D26"/>
-                            <path d="M12 21.6l4.8-10.8H22L12 21.6z" fill="#FCA326"/>
-                            <path d="M22 10.8l1.2 3.6c.1.4 0 .8-.2 1.1L12 21.6l10-10.8z" fill="#E24329"/>
-                            <path d="M22 10.8H16.8L19.2 3c.1-.4.7-.4.8 0L22 10.8z" fill="#FC6D26"/>
-                            <path d="M12 21.6L7.2 10.8H2L12 21.6z" fill="#FCA326"/>
-                            <path d="M2 10.8L.8 14.4c-.1.4 0 .8.2 1.1L12 21.6 2 10.8z" fill="#E24329"/>
-                            <path d="M2 10.8h5.2L4.8 3c-.1-.4-.7-.4-.8 0L2 10.8z" fill="#FC6D26"/>
+                            <path d="M12 21.6L7.2 10.8h9.6L12 21.6z" fill="#FC6D26" />
+                            <path d="M12 21.6l4.8-10.8H22L12 21.6z" fill="#FCA326" />
+                            <path d="M22 10.8l1.2 3.6c.1.4 0 .8-.2 1.1L12 21.6l10-10.8z" fill="#E24329" />
+                            <path d="M22 10.8H16.8L19.2 3c.1-.4.7-.4.8 0L22 10.8z" fill="#FC6D26" />
+                            <path d="M12 21.6L7.2 10.8H2L12 21.6z" fill="#FCA326" />
+                            <path d="M2 10.8L.8 14.4c-.1.4 0 .8.2 1.1L12 21.6 2 10.8z" fill="#E24329" />
+                            <path d="M2 10.8h5.2L4.8 3c-.1-.4-.7-.4-.8 0L2 10.8z" fill="#FC6D26" />
                           </svg>
                         </div>
                         <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white bg-black/60 px-2 py-1 rounded">GitLab CI</span>
@@ -398,7 +399,7 @@ export default function App() {
                       <motion.div
                         className="relative group cursor-pointer"
                         whileHover={{ scale: 1.1 }}
-                        animate={{ 
+                        animate={{
                           y: [0, -2, 0],
                         }}
                         transition={{
@@ -409,7 +410,7 @@ export default function App() {
                       >
                         <div className="w-8 h-8">
                           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="#ffffff"/>
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="#ffffff" />
                           </svg>
                         </div>
                         <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white bg-black/60 px-2 py-1 rounded">GitHub Actions</span>
@@ -423,27 +424,68 @@ export default function App() {
               </div>
             </div>
           </ScrollReveal>
+          {/* // Replace your projects section with this complete structure: */}
 
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
-            <ScrollReveal delay={0.2}>
+          <section className="py-16 px-4 max-w-7xl mx-auto">
+            {/* Section Title */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mb-4">
+                SELECTED PROJECTS
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
+            </div>
+
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               <ProjectCard
-                title="Kubernetes Cluster Automation"
-                techStack={['Terraform', 'AWS EKS', 'Helm', 'ArgoCD']}
-                description="Automated the deployment and management of production-grade Kubernetes clusters with GitOps practices."
-                architectureDiagram="/images/projects/k8s-architecture.png"
-                readMoreLink="/projects/k8s-automation"
+                title="Production-Grade 3-Tier E-Commerce Deployment on Amazon EKS with Helm, Ingress, Domain Load Balancing, SSL/TLS, and Autoscaling"
+                techStack={['Terraform', 'AWS EKS', 'Helm', 'ArgoCD', 'Jenkins', 'Grafana', 'Prometheus', 'Docker', 'domain']}
+                description="Automated deployment and management of production-grade Kubernetes clusters with GitOps."
+                architectureDiagram="https://cdn.hashnode.com/res/hashnode/image/upload/v1755963135135/48b72d02-847c-4261-b794-392f646ce13e.gif?w=1600&h=840&fit=crop&crop=entropy&auto=format,compress&gif-q=60&format=webm"
+                readMoreLink="https://blog.mooazsayyed.live/production-grade-3-tier-e-commerce-deployment-on-amazon-eks-with-helm-ingress-domain-load-balancing-ssltls-and-autoscaling"
+                githubLink="https://github.com/mooazsayyed/Production-Grade-DevOps-Application-Deployment"
+                docsLink="https://blog.mooazsayyed.live/production-grade-3-tier-e-commerce-deployment-on-amazon-eks-with-helm-ingress-domain-load-balancing-ssltls-and-autoscaling"
               />
-            </ScrollReveal>
-            <ScrollReveal delay={0.4}>
+
               <ProjectCard
-                title="CI/CD Pipeline Platform"
-                techStack={['Jenkins', 'Docker', 'SonarQube', 'Prometheus']}
-                description="Built a comprehensive CI/CD platform with automated testing, security scanning, and monitoring."
-                architectureDiagram="/images/projects/cicd-architecture.png"
-                readMoreLink="/projects/cicd-platform"
+                title="Production Grade Jenkins Monitoring with Prometheus, Grafana, InfluxDB"
+                techStack={['Jenkins', 'Docker', 'Prometheus', 'Grafana', 'InfluxDB']}
+                description="Visualized Jenkins metrics and logs & built custom dashboards in Grafana using Promtheus,Influxdb and Jenkins Plugins."
+                architectureDiagram="https://cdn.hashnode.com/res/hashnode/image/upload/v1756134007498/7dcd2746-17b5-4377-a87c-895be53c8083.gif?w=1600&h=840&fit=crop&crop=entropy&auto=format,compress&gif-q=60&format=webm"
+                readMoreLink="https://blog.mooazsayyed.live/production-grade-jenkins-monitoring-with-prometheus-grafana-influxdb"
+                githubLink="https://github.com/mooazsayyed/Production-Grade-Jenkins-Monitoring"
+                docsLink="https://blog.mooazsayyed.live/production-grade-jenkins-monitoring-with-prometheus-grafana-influxdb"
               />
-            </ScrollReveal>
-          </div>
+
+              <ProjectCard
+                title="End To End Enterprise grade CI/CD Pipeline in Jenkins for Java Application"
+                techStack={['Jenkins', 'Docker', 'Maven', "Trivy", 'Git/Github', 'ArgoCD', 'Kubernetes']}
+                description="Multi Branch pipeline in Jenkins for a Java application that deploys to kubernetes via ArgoCD."
+                architectureDiagram="https://cdn.hashnode.com/res/hashnode/image/upload/v1755798383076/9c493aad-f72a-4e55-887c-46655918bf3f.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
+                readMoreLink="https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring"
+                githubLink="https://github.com/mooazsayyed/JavaApplication"
+                docsLink="https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring"
+              />
+            </div>
+
+            {/* View More Button */}
+            <div className="text-center">
+              <a
+                href="/work"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-slate-800/80 to-blue-900/80 border border-cyan-400/30 text-white font-semibold hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/70 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/25 backdrop-blur-sm group"
+              >
+                <span>Check work page for more projects</span>
+                <svg
+                  className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </section>
         </section>
 
         {/* Certifications & Achievements Section */}
@@ -521,7 +563,7 @@ export default function App() {
                     +91 9665398253
                   </a>
                 </div>
-                
+
                 <div className="backdrop-blur-md bg-white/5 rounded-lg border border-white/10 p-4 flex items-center gap-3 hover:bg-white/10 transition-all">
                   <Mail className="w-5 h-5 text-blue-400" />
                   <a href="mailto:sayyedmooaz@gmail.com" className="text-gray-300 hover:text-blue-400">
@@ -552,7 +594,7 @@ export default function App() {
 
       {/* Floating Terminal */}
       <FloatingTerminal />
-      
+
       {/* View Counter */}
       <ViewCounter />
     </div>

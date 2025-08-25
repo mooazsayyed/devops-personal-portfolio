@@ -38,7 +38,7 @@ const workItems: WorkItem[] = [
   {
     title: "Monitoring & Observability Stack",
     description: "Implemented a comprehensive monitoring solution with custom dashboards and alerting.",
-    technologies: ["Prometheus", "Grafana", "ELK Stack", "AlertManager"],
+    technologies: ["Prometheus", "Grafana", "ELK Stack", "AlertManager", "InfluxDB"],
     icon: <LineChart className="w-6 h-6 text-purple-400" />,
     link: "/projects/monitoring-stack",
     github: "https://github.com/example/monitoring-stack",
@@ -149,7 +149,7 @@ export default function WorkDisplay() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-40 object-contain rounded-t-xl bg-black/5"
+                    className="rounded-lg mb-4 w-full h-40 object-cover"
                   />
 
                 )}

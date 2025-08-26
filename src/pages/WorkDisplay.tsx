@@ -50,7 +50,7 @@ const workItems: WorkItem[] = [
     icon: <LineChart className="w-6 h-6 text-amber-400" />,
     github: "https://github.com/mooazsayyed/devops_work",
     docs: "https://sayyedmooaz.medium.com/is-deploying-a-ruby-on-rails-app-on-kubernetes-with-argocd-tekton-a-devops-focused-walkthrough-4e54e8a1b223",
-    image: "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*4eVbc8poo9spOZ3I5hJuhA.png"
+    image: "https://drive.google.com/file/d/12FlYVbKTHpXVCZdi6MrcNIq4Z7OlnCs9/view?usp=sharing"
   }
 ];
 

@@ -63,7 +63,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
+/* .line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+} */
 @keyframes skillBarFill {
   from {
     width: 0%;
@@ -84,4 +89,17 @@
         transform: translateX(100 %);
         opacity: 1;
     }
+}
+
+
+/* Optional: Add smooth text reveal animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

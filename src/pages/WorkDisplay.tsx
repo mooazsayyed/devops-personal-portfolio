@@ -18,7 +18,7 @@ const workItems: WorkItem[] = [
   {
     title: "Production-Grade 3-Tier E-Commerce Deployment on Amazon EKS with Helm, Ingress, Domain Load Balancing, SSL/TLS, and Autoscaling",
     description: "Automated deployment and management of production-grade Kubernetes clusters with GitOps workflows and comprehensive monitoring solutions.",
-    technologies: ["Terraform", "AWS EKS", "Helm", "ArgoCD", "Jenkins", "Prometheus", "Grafana", "GIT", "Github"],
+    technologies: ["Terraform", "AWS", "Helm", "ArgoCD", "Jenkins", "Prometheus", "Grafana", "GIT", "Github", "AWS"],
     icon: <Cloud className="w-6 h-6 text-emerald-400" />,
     github: "https://github.com/mooazsayyed/Production-Grade-DevOps-Application-Deployment",
     docs: "https://blog.mooazsayyed.live/production-grade-3-tier-e-commerce-deployment-on-amazon-eks-with-helm-ingress-domain-load-balancing-ssltls-and-autoscaling",
@@ -50,7 +50,7 @@ const workItems: WorkItem[] = [
     icon: <LineChart className="w-6 h-6 text-amber-400" />,
     github: "https://github.com/mooazsayyed/devops_work",
     docs: "https://sayyedmooaz.medium.com/is-deploying-a-ruby-on-rails-app-on-kubernetes-with-argocd-tekton-a-devops-focused-walkthrough-4e54e8a1b223",
-    image: "/public/kubernetes-rails.webp" // Reference to an image in public/images folder
+    image: "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*4eVbc8poo9spOZ3I5hJuhA.png" // Reference to an image in public/images folder
   }
 ];
 

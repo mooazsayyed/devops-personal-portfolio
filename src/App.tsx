@@ -470,8 +470,8 @@ export default function App() {
 
             {/* View More Button */}
             <div className="text-center">
-              <a
-                href="/work"
+              <Link
+                to="/work"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-slate-800/80 to-blue-900/80 border border-cyan-400/30 text-white font-semibold hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/70 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/25 backdrop-blur-sm group"
               >
                 <span>Check work page for more projects</span>
@@ -483,7 +483,7 @@ export default function App() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </section>
         </section>

@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 const navItems = [
   { name: 'Home', icon: <Terminal className="w-5 h-5" />, href: '#home' },
   { name: 'About', icon: <Code2 className="w-5 h-5" />, href: '#about' },
+  { name: 'Experience', icon: <Code2 className="w-5 h-5" />, href: '#experience' },
   { name: 'Projects', icon: <Cloud className="w-5 h-5" />, href: '#projects' },
   { name: 'Skills', icon: <Database className="w-5 h-5" />, href: '#skills' },
   { name: 'Certifications', icon: <Shield className="w-5 h-5" />, href: '#certifications' },
@@ -29,9 +30,8 @@ export const Navbar: React.FC = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 bg-black/50 backdrop-blur-md' : 'py-6'
-      }`}
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-black/50 backdrop-blur-md' : 'py-6'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between gap-8">

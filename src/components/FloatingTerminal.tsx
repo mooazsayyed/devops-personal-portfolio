@@ -30,14 +30,14 @@ export const FloatingTerminal: React.FC = () => {
       setHistory([{
         command: '',
         output: 'Welcome to the interactive terminal!\n\n' +
-               'Available commands:\n' +
-               '  help     - Show this help message\n' +
-               '  about    - About the portfolio\n' +
-               '  skills   - View skills\n' +
-               '  contact  - Contact information\n' +
-               '  clear    - Clear terminal\n' +
-               '  exit     - Close terminal\n\n' +
-               'Type a command to begin...',
+          'Available commands:\n' +
+          '  help     - Show this help message\n' +
+          '  about    - About the portfolio\n' +
+          '  skills   - View skills\n' +
+          '  contact  - Contact information\n' +
+          '  clear    - Clear terminal\n' +
+          '  exit     - Close terminal\n\n' +
+          'Type a command to begin...',
         timestamp: new Date()
       }]);
     }
@@ -105,11 +105,11 @@ export const FloatingTerminal: React.FC = () => {
       {/* Terminal Toggle Button with enhanced animations */}
       <motion.button
         initial={{ scale: 0 }}
-        animate={{ 
+        animate={{
           scale: shouldPulse ? [1, 1.1, 1] : 1,
           rotate: shouldPulse ? [0, -10, 10, -10, 0] : 0,
         }}
-        transition={{ 
+        transition={{
           duration: 1,
           repeat: shouldPulse ? Infinity : 0,
           repeatDelay: 2
@@ -129,7 +129,7 @@ export const FloatingTerminal: React.FC = () => {
         <motion.div
           className="fixed top-[60px] right-4 z-50 whitespace-nowrap flex justify-center"
           initial={{ opacity: 0, y: -5 }}
-          animate={{ 
+          animate={{
             opacity: 1,
             y: [0, 3, 0]
           }}

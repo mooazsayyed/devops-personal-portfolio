@@ -251,7 +251,7 @@ export default function App() {
         </motion.section>
 
         {/* About Section */}
-        <section id="about" className="max-w-6xl w-full space-y-16">
+        <section id="about" className="max-w-6xl w-full space-y-16 scroll-mt-16">
           <ScrollReveal>
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
@@ -296,7 +296,7 @@ export default function App() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="max-w-6xl w-full space-y-16">
+        <section id="skills" className="max-w-6xl w-full space-y-16 scroll-mt-16">
           <ScrollReveal>
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
@@ -328,7 +328,7 @@ export default function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="max-w-6xl w-full space-y-8">
+        <section id="projects" className="max-w-6xl w-full space-y-8 scroll-mt-16">
           <ScrollReveal>
             <div className="text-center space-y-4 mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
@@ -489,7 +489,7 @@ export default function App() {
         </section>
 
         {/* Certifications & Achievements Section */}
-        <section id="certifications" className="max-w-6xl w-full space-y-16">
+        <section id="certifications" className="max-w-6xl w-full space-y-16 scroll-mt-16">
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
               Certifications & Achievements
@@ -541,7 +541,7 @@ export default function App() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="max-w-6xl w-full space-y-16">
+        <section id="contact" className="max-w-6xl w-full space-y-16 scroll-mt-16">
           <ScrollReveal>
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">

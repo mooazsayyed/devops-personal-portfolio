@@ -57,17 +57,18 @@ export const Navbar: React.FC = () => {
       className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-black/50 backdrop-blur-md' : 'py-6'
         }`}
     >
-      <div className="w-full max-w-7xl ml-0 mr-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between gap-8">
-          {/* Logo */}
-          <a href="#home" className="flex-shrink-0 ml-0">
-            <Logo />
-          </a>
+      <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+        <div className="grid grid-cols-3 items-center gap-4 md:gap-8">
+          {/* Logo (Left) */}
+          <div className="flex items-center justify-start">
+            <a href="#home" className="flex-shrink-0">
+              <Logo />
+            </a>
+          </div>
 
-          {/* Center Container for Nav Links */}
-          <div className="flex-1 flex justify-center md:pl-10 lg:pl-16">
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center gap-1">
+          {/* Navigation Links (Center) */}
+          <div className="hidden md:flex items-center justify-center ml-12">
+            <div className="flex items-center gap-1">
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}
@@ -110,37 +111,39 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="hidden md:flex items-center gap-4 ml-auto md:pl-6 lg:pl-10">
-            {[
-              { icon: <Github className="w-5 h-5" />, href: 'https://github.com/mooazsayyed/', color: 'hover:text-purple-400' },
-              { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/mooazsayyed/', color: 'hover:text-blue-400' },
-              { icon: <Twitter className="w-5 h-5" />, href: 'https://x.com/MooazSayyed', color: 'hover:text-cyan-400' },
-            ].map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-gray-400 ${social.color} transition-colors`}
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                {social.icon}
-              </motion.a>
-            ))}
-          </div>
+          {/* Right: Social Links + Mobile button */}
+          <div className="flex items-center justify-end gap-4">
+            <div className="hidden md:flex items-center gap-4">
+              {[
+                { icon: <Github className="w-5 h-5" />, href: 'https://github.com/mooazsayyed/', color: 'hover:text-purple-400' },
+                { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/mooazsayyed/', color: 'hover:text-blue-400' },
+                { icon: <Twitter className="w-5 h-5" />, href: 'https://x.com/MooazSayyed', color: 'hover:text-cyan-400' },
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-gray-400 ${social.color} transition-colors`}
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
+            </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </motion.button>
+            {/* Mobile Menu Button */}
+            <motion.button
+              className="md:hidden text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

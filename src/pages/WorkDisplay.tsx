@@ -12,6 +12,8 @@ interface WorkItem {
   github?: string;
   docs?: string;
   image?: string;
+  demo?: string; // URL for live demo/preview
+  status?: 'live' | 'maintenance' | 'offline'; // Status of the live demo
 }
 
 const workItems: WorkItem[] = [
@@ -23,6 +25,16 @@ const workItems: WorkItem[] = [
     github: "https://github.com/mooazsayyed/Production-Grade-DevOps-Application-Deployment",
     docs: "https://blog.mooazsayyed.live/production-grade-3-tier-e-commerce-deployment-on-amazon-eks-with-helm-ingress-domain-load-balancing-ssltls-and-autoscaling",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1755963135135/48b72d02-847c-4261-b794-392f646ce13e.gif?w=1600&h=840&fit=crop&crop=entropy&auto=format,compress&gif-q=60&format=webm"
+  },
+  {
+    title: "NamazTime.info — Ruby on Rails-powered Web App with Maps API, Location-based Calculations & Dynamic Rendering to find nearest local mosque and their salah timings",
+    description: "NamazTime — Ruby on Rails-powered Web App with Maps API, location-based calculations, dynamic rendering, 1000+ active users, daily traffic, and faster load times & accurate prayer schedules with a managed admin panel.",
+    technologies: ["Ruby on Rails", "Postgres", "GIT", "Github", "Google-Maps Api"],
+    icon: <Database className="w-6 h-6 text-emerald-400" />,
+    demo: "https://namaztime.info/",
+    status: "live",
+    image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1758569197647/4dc3219f-cfc7-48ae-95a2-da9dd9d44e64.png?auto=compress,format&format=webp",
+    link: "https://namaztime.info/", // Added link property to enable button visibility
   },
   {
     title: "End to End CI/CD Pipeline for Java Application",

@@ -1,12 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Twitter, Terminal, Code2, Cloud, Database, Shield, Mail } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Twitter, Code2, Cloud, Database, Shield, Mail, Briefcase, Home } from 'lucide-react';
 import { Logo } from './Logo';
 
 const navItems = [
-  { name: 'Home', icon: <Terminal className="w-5 h-5" />, href: '#home' },
+  {
+    name: 'Home',
+    icon: (
+      <motion.div
+        className="flex items-center justify-center"
+        animate={{ y: [0, -2, 0], scale: [1, 1.05, 1] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Home className="w-5 h-5" />
+      </motion.div>
+    ),
+    href: '#home'
+  },
   { name: 'About', icon: <Code2 className="w-5 h-5" />, href: '#about' },
-  { name: 'Experience', icon: <Code2 className="w-5 h-5" />, href: '#experience' },
+  {
+    name: 'Experience',
+    icon: (
+      <motion.div
+        className="flex items-center justify-center"
+        animate={{ rotate: [0, 6, -6, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Briefcase className="w-5 h-5" />
+      </motion.div>
+    ),
+    href: '#experience'
+  },
   { name: 'Projects', icon: <Cloud className="w-5 h-5" />, href: '#projects' },
   { name: 'Skills', icon: <Database className="w-5 h-5" />, href: '#skills' },
   { name: 'Certifications', icon: <Shield className="w-5 h-5" />, href: '#certifications' },
@@ -33,15 +57,15 @@ export const Navbar: React.FC = () => {
       className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-black/50 backdrop-blur-md' : 'py-6'
         }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="w-full max-w-7xl ml-0 mr-auto px-2 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between gap-8">
           {/* Logo */}
-          <a href="#home" className="flex-shrink-0 -ml-3">
+          <a href="#home" className="flex-shrink-0 ml-0">
             <Logo />
           </a>
 
           {/* Center Container for Nav Links */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center md:pl-10 lg:pl-16">
             {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
@@ -87,7 +111,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Social Links */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 ml-auto md:pl-6 lg:pl-10">
             {[
               { icon: <Github className="w-5 h-5" />, href: 'https://github.com/mooazsayyed/', color: 'hover:text-purple-400' },
               { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/mooazsayyed/', color: 'hover:text-blue-400' },

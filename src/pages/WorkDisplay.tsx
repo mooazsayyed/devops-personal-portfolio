@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft, Code2, Cloud, GitBranch, Database, Shield, LineChart, Github, Book, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Code2, Cloud, GitBranch, Database, LineChart, Github, Book, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -41,7 +41,7 @@ const workItems: WorkItem[] = [
     description: "Built a comprehensive CI/CD pipeline using Jenkins with automated testing, security scanning, and monitoring for seamless deployment workflows.",
     technologies: ["Jenkins", "Docker", "SonarQube", "Prometheus", "ArgoCD", "Kubernetes", "Trivy"],
     icon: <GitBranch className="w-6 h-6 text-violet-400" />,
-    link: "https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring",
+    // link: "https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring",
     github: "https://github.com/example/cicd-platform",
     docs: "https://blog.mooazsayyed.live/production-level-cicd-pipeline-with-jenkins-sonarqube-argocd-and-monitoring",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1755798383076/9c493aad-f72a-4e55-887c-46655918bf3f.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
@@ -70,7 +70,7 @@ const allTags = ["All", ...new Set(workItems.flatMap(item => item.technologies))
 
 export default function WorkDisplay() {
   const [selectedTags, setSelectedTags] = useState<string[]>(["All"]);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
 
   const handleTagClick = (tag: string) => {
     if (tag === "All") {
@@ -193,8 +193,6 @@ export default function WorkDisplay() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-              onHoverStart={() => setHoveredCard(index)}
-              onHoverEnd={() => setHoveredCard(null)}
               className="group relative"
             >
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-xl border border-gray-700/50 hover:border-gray-600/80 transition-all duration-300 hover:shadow-xl hover:shadow-black/30 h-[420px] flex flex-col">
@@ -250,32 +248,109 @@ export default function WorkDisplay() {
                     )}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex gap-2 mt-auto">
-                    {item.github && (
-                      <a
-                        href={item.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gray-800/60 hover:bg-gray-700/80 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/80 rounded-lg text-gray-300 hover:text-white transition-all duration-300 text-xs font-medium"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span>GitHub</span>
-                      </a>
-                    )}
+                  {/* Action Row */}
+                  {/namaztime/i.test(item.title) ? (
+                    // Extended: NamazTime card gets Status + Demo + Visit (+ keep GitHub/Docs if present)
+                    <div className="flex items-center gap-2 mt-auto">
+                      {item.status && (
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border
+                            ${item.status === 'live'
+                              ? 'bg-emerald-500/15 border-emerald-400/40 text-emerald-300'
+                              : item.status === 'maintenance'
+                                ? 'bg-amber-500/15 border-amber-400/40 text-amber-300'
+                                : 'bg-rose-500/15 border-rose-400/40 text-rose-300'}`}
+                          aria-label={`Status: ${item.status}`}
+                        >
+                          <span
+                            className={`${item.status === 'live'
+                              ? 'bg-emerald-400'
+                              : item.status === 'maintenance'
+                                ? 'bg-amber-400'
+                                : 'bg-rose-400'} w-1.5 h-1.5 rounded-full animate-pulse`}
+                          />
+                          <span className="capitalize">{item.status}</span>
+                        </span>
+                      )}
 
-                    {item.docs && (
-                      <a
-                        href={item.docs}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-500/20 to-violet-500/20 hover:from-emerald-500/30 hover:to-violet-500/30 backdrop-blur-sm border border-emerald-400/30 hover:border-emerald-400/50 rounded-lg text-white font-medium transition-all duration-300 text-xs"
-                      >
-                        <Book className="w-4 h-4" />
-                        <span>Docs</span>
-                      </a>
-                    )}
-                  </div>
+                      <div className="flex gap-2 ml-auto w-full sm:w-auto">
+                        {item.demo && (
+                          <a
+                            href={item.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-cyan-500/15 to-blue-500/15 hover:from-cyan-500/25 hover:to-blue-500/25 backdrop-blur-sm border border-cyan-400/30 hover:border-cyan-400/50 rounded-lg text-cyan-200 hover:text-white transition-all duration-300 text-xs font-medium"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Demo</span>
+                          </a>
+                        )}
+
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gray-800/60 hover:bg-gray-700/80 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/80 rounded-lg text-gray-300 hover:text-white transition-all duration-300 text-xs font-medium"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Visit</span>
+                          </a>
+                        )}
+
+                        {item.github && (
+                          <a
+                            href={item.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gray-800/60 hover:bg-gray-700/80 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/80 rounded-lg text-gray-300 hover:text-white transition-all duration-300 text-xs font-medium"
+                          >
+                            <Github className="w-4 h-4" />
+                            <span>GitHub</span>
+                          </a>
+                        )}
+
+                        {item.docs && (
+                          <a
+                            href={item.docs}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-500/20 to-violet-500/20 hover:from-emerald-500/30 hover:to-violet-500/30 backdrop-blur-sm border border-emerald-400/30 hover:border-emerald-400/50 rounded-lg text-white font-medium transition-all duration-300 text-xs"
+                          >
+                            <Book className="w-4 h-4" />
+                            <span>Docs</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    // Original: Only GitHub and Docs for all other cards
+                    <div className="flex gap-2 mt-auto">
+                      {item.github && (
+                        <a
+                          href={item.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gray-800/60 hover:bg-gray-700/80 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/80 rounded-lg text-gray-300 hover:text-white transition-all duration-300 text-xs font-medium"
+                        >
+                          <Github className="w-4 h-4" />
+                          <span>GitHub</span>
+                        </a>
+                      )}
+
+                      {item.docs && (
+                        <a
+                          href={item.docs}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-500/20 to-violet-500/20 hover:from-emerald-500/30 hover:to-violet-500/30 backdrop-blur-sm border border-emerald-400/30 hover:border-emerald-400/50 rounded-lg text-white font-medium transition-all duration-300 text-xs"
+                        >
+                          <Book className="w-4 h-4" />
+                          <span>Docs</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Hover Effect Border */}

@@ -159,12 +159,12 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.35 }}
-              className="space-y-2 mb-6"
+              className="space-y-3 mb-8"
             >
               <h1 className="text-2xl md:text-3xl font-semibold text-white">
                 I'm Mooaz Sayyed
               </h1>
-              <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-500">
+              <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-500 leading-tight">
                 DevOps / SRE Engineer
               </h2>
             </motion.div>
@@ -174,9 +174,10 @@ export default function App() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="mb-5 text-base md:text-lg text-gray-300"
+              className="mb-5 text-base md:text-lg text-gray-300 flex items-center justify-center gap-1"
             >
-              <span className="text-gray-400">Focus:</span> <RotatingHighlights />
+              <span className="text-gray-400">Focus:</span>
+              <RotatingHighlights />
             </motion.div>
 
             {/* Value proposition */}

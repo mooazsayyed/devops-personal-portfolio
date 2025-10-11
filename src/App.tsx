@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, ReactNode } from 'react';
-import { Terminal as TerminalIcon, Download, Send, Code2, Cloud, GitBranch, Database, Cog, LineChart, Shield, Award, Star, Trophy, Github, Linkedin, Twitter, Phone, Mail } from 'lucide-react';
+import { Terminal as TerminalIcon, Download, Send, Code2, Cloud, GitBranch, Database, Award, Github, Phone, Mail } from 'lucide-react';
 import { Terminal } from './components/Terminal';
 import { FloatingTerminal } from './components/FloatingTerminal';
 import { TechCard } from './components/TechCard';
@@ -12,30 +12,33 @@ import { TimelineSection } from './components/TimelineSection';
 import { SkillsNetwork } from './components/SkillsNetwork';
 import { CICDWorkflow } from './components/CICDWorkflow';
 import { DevOpsAchievements } from './components/AchievementPreview';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useSpring, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ViewCounter } from './components/ViewCounter';
 
-function TypewriterText({ text }: { text: string }) {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+// Removed typing effect to make the hero more skimmable for recruiters
+
+function RotatingHighlights() {
+  const words = ['Kubernetes', 'CI/CD', 'AWS', 'Terraform', 'SRE'];
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, 100);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, text]);
+    const id = setInterval(() => setIndex((i) => (i + 1) % words.length), 1500);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <span className="font-mono font-bold">
-      {displayText}
-      <span className="animate-pulse">_</span>
-    </span>
+    <div className="inline-flex h-6 items-center overflow-hidden align-middle w-32 justify-center">
+      <motion.span
+        key={words[index]}
+        initial={{ y: 12, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 font-semibold"
+      >
+        {words[index]}
+      </motion.span>
+    </div>
   );
 }
 
@@ -126,12 +129,9 @@ export default function App() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            {/* Welcome Text */}
-            <h1 className="text-4xl font-bold text-white mb-8">Welcome to My Portfolio</h1>
-
             {/* Terminal Icon with enhanced animation */}
             <motion.div
-              className="flex items-center justify-center mb-6"
+              className="flex items-center justify-center mb-8"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{
@@ -141,53 +141,68 @@ export default function App() {
                 delay: 0.2
               }}
             >
-              <TerminalIcon className="w-12 h-12 text-emerald-400 transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500" />
+              <TerminalIcon className="w-16 h-16 text-emerald-400 transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500" />
             </motion.div>
 
-            {/* Hero Text with dramatic reveal */}
-            <motion.h1
-              initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={{
-                opacity: 1,
-                y: [0, -5, 0],
-                scale: 1
-              }}
-              transition={{
-                duration: 1.2,
-                ease: [0.6, -0.05, 0.01, 0.99],
-                y: {
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  duration: 2,
-                }
-              }}
-              className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400"
-            >
-              <TypewriterText text="I am Mooaz Sayyed – DevOps Engineer | SRE" />
-            </motion.h1>
-
-            {/* Subtitle with staggered reveal */}
+            {/* Welcome message with harmonious sizing */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{
-                opacity: 1,
-                y: [0, -3, 0],
-              }}
-              transition={{
-                duration: 1,
-                delay: 0.8,
-                ease: "easeOut",
-                y: {
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  duration: 2,
-                  delay: 0.2
-                }
-              }}
-              className="text-xl md:text-2xl text-gray-300 mt-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-sm md:text-base text-gray-400 uppercase tracking-wider mb-3"
             >
-              Automating Deployments. Ensuring Reliability. Scaling with Confidence.
+              Welcome to My Portfolio
             </motion.p>
+
+            {/* Name + Role in single cohesive block */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="space-y-2 mb-6"
+            >
+              <h1 className="text-2xl md:text-3xl font-semibold text-white">
+                I'm Mooaz Sayyed
+              </h1>
+              <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-500">
+                DevOps / SRE Engineer
+              </h2>
+            </motion.div>
+
+            {/* Rotating highlights in balanced sizing */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="mb-5 text-base md:text-lg text-gray-300"
+            >
+              <span className="text-gray-400">Focus:</span> <RotatingHighlights />
+            </motion.div>
+
+            {/* Value proposition */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6"
+            >
+              I build production‑grade CI/CD and Kubernetes platforms on AWS — secure, observable, and cost‑aware — engineered for 99.9% uptime.
+            </motion.p>
+
+            {/* Quick availability badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="flex flex-wrap justify-center gap-3 mb-8"
+            >
+              <span className="px-4 py-2 rounded-full text-sm bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 font-medium">
+                Open to Full‑time
+              </span>
+              <span className="px-4 py-2 rounded-full text-sm bg-white/10 border border-white/20 text-gray-200">
+                Remote / Hybrid
+              </span>
+            </motion.div>
 
             {/* Decorative elements */}
             <motion.div
@@ -214,8 +229,13 @@ export default function App() {
             </motion.div>
           </motion.div>
 
-          {/* Glassmorphism Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-12">
+          {/* CTA Buttons with balanced spacing */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.75 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
             <Link
               to="/work"
               className="group flex items-center gap-2 px-6 py-3 backdrop-blur-md bg-white/10 rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
@@ -233,8 +253,6 @@ export default function App() {
               <span>Download Resume</span>
             </a>
 
-
-
             <button
               onClick={() => {
                 document.getElementById('contact')?.scrollIntoView({
@@ -247,7 +265,7 @@ export default function App() {
               <Send className="w-5 h-5 text-cyan-400" />
               <span>Contact Me</span>
             </button>
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* About Section */}
